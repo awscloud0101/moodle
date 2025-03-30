@@ -1,0 +1,11 @@
+<aura:component implements="c:eg_method" >
+    <lightning:card title="A1C1- parent">
+        <lightning:input label="Enter Employee Name" value="{!v.data1_str}"/>
+        <lightning:input label="Enter Employee Salary" value="{!v.data4_dec}"/>
+        <lightning:button label="Submit" iconName="utility:bug" variant="brand" onclick="{!c.subme}"/>
+        <c:init_method_A1C1_Child aura:id="chld1"/>
+       
+        
+    </lightning:card>
+	
+</aura:component>

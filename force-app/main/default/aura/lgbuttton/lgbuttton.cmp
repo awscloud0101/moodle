@@ -1,0 +1,26 @@
+<aura:component >
+    <lightning:button label="Dileep" variant="base" iconName="utility:cart" iconPosition="right" onclick="{!c.saveme}"/>
+    <lightning:button label="Bittu" variant="brand" iconName="utility:log_a_call" iconPosition="right" onclick="{!c.saveme}"/>
+	<lightning:button label="Sandeep" variant="success" iconName="utility:locker_service_console" iconPosition="right" onclick="{!c.saveme}"/>
+	<lightning:button label="Chandan" variant="brand-outline" iconName="utility:meet_present_panel" iconPosition="right" onclick="{!c.saveme}"/>
+<lightning:button label="Ajay" variant="destructive" iconName="utility:notification_snoozed" iconPosition="right" onclick="{!c.saveme}"/>
+<lightning:button label="Nithish" variant="destructive-text" iconName="utility:number_input" iconPosition="right" onclick="{!c.saveme}"/>
+<lightning:button label="Dinesh" variant="neutral" iconName="utility:omni_channel" iconPosition="right" onclick="{!c.saveme}"/>
+
+    <lightning:buttonIcon iconName="utility:http" alternativeText="hi" variant="brand" onclick="{!c.saveme}"/>
+	<lightning:buttonIcon iconName="utility:activity" alternativeText="hi" variant="success" onclick="{!c.saveme}"/>
+    <lightning:buttonIcon iconName="utility:settings" alternativeText="hi" variant="destructive" onclick="{!c.saveme}"/>
+	<lightning:buttonIcon iconName="utility:delete" alternativeText="hi" variant="base" onclick="{!c.saveme}"/>
+
+    <lightning:buttonMenu>
+        <lightning:menuSubHeader label="ATG INFORMATICS "/>
+        <lightning:menuItem label="OneControl" Value="OC" />
+                <lightning:menuItem label="CampusWhiz" Value="CW"/>
+        <lightning:menuDivider/>
+                <lightning:menuSubHeader label="ROBOART"/>
+
+                <lightning:menuItem label="AgriControl" Value="AC"/>
+                <lightning:menuItem label="HydroMate" Value="HM"/>
+        
+        </lightning:buttonMenu>
+</aura:component>

@@ -1,0 +1,14 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="con" type="contact"/>
+    <aura:attribute name="newcon" type="contact"/>
+    
+    <lightning:card title="LDS PROGRAMMING">
+        <force:recordData aura:id="myrec" targetRecord="{!v.newcon}" targetFields="{!v.con}" fields="FirstName" mode="Edit"/>
+        <lightning:input label="First Name" value="{v.con.FirstName}"/>
+        <lightning:input label="Last Name" value="{v.con.LastName}"/>
+        <lightning:input label="Email" value="{v.con.Email}"/>
+        <lightning:input label="Phone" value="{v.con.Phone}"/>
+        <lightning:button label="Save" iconName="utility:save" variant="success" onclick="{!c.saveme}"/>
+                
+    </lightning:card>
+</aura:component>

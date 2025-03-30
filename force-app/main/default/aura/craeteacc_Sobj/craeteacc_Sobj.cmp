@@ -1,0 +1,25 @@
+<aura:component controller="createacc_Sobj">
+    <aura:attribute name='accss' type="Account" default="{sObjectType : 'Account'}"/>
+    
+    <lightning:card IconName="standard:account">
+        <aura:set attribute="title">
+            <b>D Account</b><br/>
+            <b>New Account</b>
+        </aura:set>
+        
+        <aura:set attribute="actions">
+            <lightning:buttonGroup>
+                <lightning:button label="Save" iconName="utility:save" variant="success" onclick="{!c.saveme}"/>
+                <lightning:button label="Clear" iconName="utility:clear" variant="destructive" onclick="{!c.clearme}"/>
+            </lightning:buttonGroup>
+        </aura:set>
+        
+        <lightning:input label="Account Name" value="{!v.accss.Name}"/>
+        <lightning:input label="Account Phone" value="{!v.accss.Phone}"/>
+        <lightning:input label="Account Fax" value="{!v.accss.Fax}"/>
+        <lightning:input label="Account Industry" value="{!v.accss.Industry}"/>
+        <lightning:input label="Account Rating" value="{!v.accss.Rating}"/>
+        <lightning:input label="Account Sic Code" value="{!v.accss.Sic}"/>
+        <lightning:input label="Account Description" value="{!v.accss.Descrption}"/>
+    </lightning:card>
+</aura:component>

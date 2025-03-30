@@ -1,0 +1,12 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+
+    <aura:attribute name="recvmsg" type="String"/>
+    
+    <aura:method name="passmsg" action="{!c.passme}">
+        <aura:attribute name="metddata" type="String"/>
+    </aura:method>
+    
+    <lightning:card title="Action OverRide-Aura Method-Child-Display Data">
+    <p><b>Message Recieved From Parent</b></p>{!v.recvmsg}
+    </lightning:card>
+</aura:component>

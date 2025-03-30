@@ -1,0 +1,28 @@
+<aura:component >
+    <aura:attribute name="num1" type="integer"/>
+    <aura:attribute name="num2" type="integer" />
+    <aura:attribute name="num3" type="integer"/>
+    <aura:attribute name="result" type="integer"/>
+   
+    
+<lightning:card iconName="utility:ad_set">
+    <aura:set attribute="title">
+        <b>OneControl</b><br/>
+        Greater of 3 Numbers
+    </aura:set>
+     <c:lgbuttton/>
+   		 <lightning:input label="Enter The First Number" value="{!v.num1}"/>
+        <lightning:input label="Enter The Second Number" value="{!v.num2}"/>
+        <lightning:input label="Enter The Third Number" value="{!v.num3}"/>
+    
+    <aura:set attribute="actions">
+        <lightning:buttonGroup>
+        <lightning:button label="CALCULATE" variant="success" iconName="utility:data_transforms" onclick="{!c.calcme}"/>
+		<lightning:button label="CLEARME" iconName="utility:clear" variant="destructive"  onclick="{!c.clearme}"/>
+</lightning:buttonGroup>
+    </aura:set>
+    ==================================================================================
+    <b>The Greater of 3 Numbers is : </b><b>{!v.result}</b>
+    </lightning:card>
+    <c:lightningbuttons/>
+ </aura:component>

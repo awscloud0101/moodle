@@ -1,0 +1,6 @@
+<aura:component implements="c:eg_method" >
+    <lightning:card title="A1C1- Child">
+    <b>EMployee Name Entered : </b> {!v.data1_str} <p></p>
+        <b>Employee Salary Entered : </b> {!v.data4_dec}<p></p>
+    </lightning:card>
+</aura:component>

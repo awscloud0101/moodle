@@ -1,0 +1,21 @@
+<apex:page standardController="lead" >
+    <apex:pageBlock title="general Information">
+        <b>Dileep Chintala</b>
+        <apex:pageBlockSection title="Personal Informaion">
+        Name
+        Mobile Numer
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Educational Informaion">
+        School
+            College
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Experience Informaion">
+        Company Name
+            Prevoius
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Marital Informaion">
+        Married 
+            Single
+        </apex:pageBlockSection>
+    </apex:pageBlock> 
+   </apex:page>

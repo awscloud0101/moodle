@@ -1,0 +1,12 @@
+<apex:page >
+    <apex:form >
+        <h1 style="color: blue;"><b>Welcome to AGRICONTROL</b></h1>
+        <apex:inputText label="Motor Name"   />
+        <apex:commandButton value="Submit" action="{!submitAction}" />
+    </apex:form>
+    <script>
+        document.querySelector('input').addEventListener('input', function() {
+            console.log('Input changed');
+        });
+    </script>
+</apex:page>
