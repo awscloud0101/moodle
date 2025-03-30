@@ -1,0 +1,9 @@
+<apex:page controller="MyController">
+    <apex:form >
+        <apex:commandButton value="Fetch Data" action="{!fetchData}" rerender="resultPanel"/>
+    </apex:form>
+
+    <apex:outputPanel id="resultPanel">
+        <apex:outputText value="{!someData}" />
+    </apex:outputPanel>
+</apex:page>

@@ -1,0 +1,26 @@
+<apex:page >
+    <apex:slds />
+    <div class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-account" title="account">
+                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                            
+                        </svg>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2>
+                        <a href="#" class="slds-card__header-link slds-truncate">
+                            <span class="slds-text-heading_small">AGRICONTROL Motor</span>
+                        </a>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+            <p>Monitor and control your motor remotely.</p>
+        </div>
+    </div>
+</apex:page>

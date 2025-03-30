@@ -1,0 +1,16 @@
+<aura:component >
+<lightning:card iconName="standard:Account">	
+ <aura:set attribute="title">
+     Account<br/>
+    <h1><b>New Account</b></h1>
+    </aura:set>   
+    <aura:set attribute="actions">
+        <lightning:button variant="base" label="Base"/>
+        <lightning:button variant="neutral" label="Neutral"/>
+        <lightning:button variant="brand" label="Brand"/>
+        <lightning:button variant="destructive" label="Destructive"/>
+        <lightning:button variant="brand" label="abc"/>
+        <lightning:button variant="success" label="Success"/>
+    </aura:set>
+    </lightning:card>
+</aura:component>

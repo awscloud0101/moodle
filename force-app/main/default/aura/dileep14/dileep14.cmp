@@ -1,0 +1,33 @@
+<aura:component >
+    <!-- LIGHTNING BUTTON -->
+    <lightning:button label="Button1"/>
+    <lightning:button label="Button - Base" iconName="utility:cart"/>
+    <lightning:button label="Button - Brand" variant="brand" iconName="untility:change_record_type"/>
+    <lightning:button label="Button - Brand Outline" variant="brand-outline"/>
+    <lightning:button label="Button - Destructive" variant="destructive"/>
+    <lightning:button label="Button - Destructive Text" variant="destructive-text" iconName="utility:edit_gpt" iconPosition="right"/>
+    <lightning:button label="Button - success" variant="success" onclick="{!c.callme}"/>
+    <lightning:button label="Button - neutral" variant="neutral"/>
+    
+    <!-- LIGHTNING BUTTON ICONS -->
+    <lightning:buttonIcon iconName = "utility:http" alternativeText = "hi" variant="brand"/>
+    <lightning:buttonIcon iconName = "utility:setup" alternativeText = "hi"/>
+    <lightning:buttonIcon iconName = "utility:heart" alternativeText = "hi"/>
+    <lightning:buttonIcon iconName = "utility:hierarchy" alternativeText ="hi"/>
+    
+    <!-- LIGHTNING BUTTON MENU-->
+    <lightning:buttonMenu>
+        <lightning:menuSubheader label="black Drinks"/>
+        <lightning:menuItem label="Thumsup" Value="TU"/>
+        <lightning:menuItem label="Pepsi" Value="TU"/>
+        <lightning:menuItem label="CocoCola" Value="TU"/>
+        <lightning:menuDivider/>
+        <lightning:menuSubheader label="Orange Drinks"/>
+            <lightning:menuItem label="Miranda" Value="TU"/>
+        <lightning:menuItem label="Fanta" Value="TU"/>
+         <lightning:menuDivider/>
+        <lightning:menuSubheader label="White Drinks"/>
+                    <lightning:menuItem label="Sprite" Value="TU"/>
+       				 <lightning:menuItem label="Pepsi" Value="TU"/>
+    </lightning:buttonMenu>
+</aura:component>

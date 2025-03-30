@@ -1,0 +1,12 @@
+<aura:interface description="Interface with Method and Attribute">
+	<aura:attribute name="data1_str" type="String"/>
+    <aura:attribute name="data2_str" type="String"/>
+    <aura:attribute name="data3_int" type="Integer"/>
+    <aura:attribute name="data4_dec" type="Decimal"/>
+    
+    <aura:method name="methody1" action="{!c.method1me}">
+        <aura:attribute name="name" type="String"/>
+        <aura:attribute name="sal" type="Decimal"/>
+    </aura:method>
+    
+</aura:interface>

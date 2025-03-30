@@ -1,0 +1,12 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <aura:attribute name="motor" type="Motor__c" />
+    <lightning:card title="Motor Status" iconName="utility:bug">
+                <div class="slds-p-around_medium">
+                    <lightning:formattedtext value="{!v.motor.Power_Status__c}" label="Power Status"/>
+                    <lightning:formattedText value="{!v.motor.Running_Time__c}" label="Running Time"/>
+                    <lightning:formattedtext value="{!v.motor.Water_Level__c}" label="Water Level"/>
+       				
+
+        </div>
+    </lightning:card>
+</aura:component>

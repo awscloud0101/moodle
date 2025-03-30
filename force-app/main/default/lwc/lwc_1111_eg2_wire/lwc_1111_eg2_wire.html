@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="D detail" icon-name="custom:custom25"></lightning-card>
+    <lightning-layout multiple-rows='true'>
+    <template for:each={Ddata.data} for:item='acc'>
+        <lightning-layout-item key={acc.id} size="4" paddingaround="small">
+            <div key={acc.id} class="mydxbox">
+            <b>Accoount ID :</b> {acc.Id} </br>
+            <b>Account Name :</b> {acc.Name} </br>
+            <b>Account Phone :</b> {acc.Phone} </br>
+            <b>Account Industry :</b> {acc.Industry} </br>
+            <b>Account Rating :</b> {acc.Rating} </br>
+        </div>
+        </lightning-layout-item>
+    </template>
+
+   </lightning-layout> 
+</template>

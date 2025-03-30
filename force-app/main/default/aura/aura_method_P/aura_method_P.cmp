@@ -1,0 +1,9 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+
+    <aura:attribute name="msg" type="String"/>
+    <lightning:card title="ACTION OVERRIDE - AURA METHOD - PARENT - ENTER DATA">
+    <lightning:input label= "Enter Your Message" value="{!v.msg}"/>
+    <lightning:button label="Submit" iconName="utility:bug" variant="success" onclick="{!c.subme}"/>
+    </lightning:card>
+    <c:aura_method_C aura:id="chld1"/>
+</aura:component>

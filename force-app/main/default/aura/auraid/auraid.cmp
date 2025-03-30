@@ -1,0 +1,24 @@
+<aura:component >
+    
+        <aura:attribute name="result" type="String" />
+
+    
+	<lightning:card title="Aura ID USE" iconName="action:share_poll">
+        <lightning:input label="Enter First Number" type="text" aura:id="inp1"/>
+        <lightning:input label="Enter Second Number" type="text" aura:id="inp2"/>
+      
+          
+
+        <aura:set attribute="actions">
+        <lightning:buttonGroup>
+        <lightning:button label="ADD" iconName="utility:add" variant="success" aura:id="add" onclick="{!c.addme}"/>
+        <lightning:button label="SUBSTRACT" iconName="utility:dash" variant="destructive" aura:id="sub" onclick="{!c.subme}"/>
+        <lightning:button label="MULTIPLY" iconName="utility:close" variant="brand" aura:id="mul" onclick="{!c.mulme}"/>
+        <lightning:button label="DIVIDE" iconName="utility:remove_formatting" variant="brand-outline" aura:id="div" onclick="{!c.divme}"/>
+</lightning:buttonGroup>
+</aura:set>
+        
+<lightning:formattedText value="{!v.result}" class="slds-p-top_medium" />
+
+     </lightning:card>
+</aura:component>

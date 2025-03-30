@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="account list by Searchword" icon-name="standard:Account">
+    <lightning-input label="Enter Search Text" type="search" onchange={capsearchkey}></lightning-input>
+    <lightning-button label="Search" icon-name="utility:search" variant="brand" onclick={searchme}></lightning-button>
+    <p></p>
+    <b>*******************************1 tiles************************************</b>
+    <p></p>
+    <b>*******************************2 data table*******************************************</b>
+<lightning-datatable key-field="Id" data={dileep.data} columns={myclm}></lightning-datatable>
+</lightning-card>
+    
+</template>

@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="Array Database">
+        {cities}
+        <p></p>
+        <b>***********Way 1 Template for each***************</b> <p></p>
+        <template for:each={cities} for:item=c>
+            <p key={c}>
+                Good Evening {c}
+                </p>
+        </template>
+
+        <b>***********Way 1 Template for each***************</b> <p></p>
+        <template iterator:it={cities}>
+            <p key={it.value}>
+                Good Night {it.value}
+            </p>
+        </template>
+ 
+ 
+    </lightning-card>
+</template>

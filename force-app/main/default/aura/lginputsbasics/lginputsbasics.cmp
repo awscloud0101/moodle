@@ -1,0 +1,34 @@
+<aura:component >
+    <aura:attribute name="EmpName" type="string"/>
+    <aura:attribute name="EmpPhnNmbr" type="integer"/>
+    <aura:attribute name="EmpEducation" type="string"/>
+    <aura:attribute name="EmpCity" type="string"/>
+    <aura:attribute name="EmpEmail" type="string"/>
+    <aura:attribute name="EmpDOB" type="DateTime"/>
+    <aura:attribute name="EmpJoinDate" type="date"/>
+    <aura:attribute name="EmpFavClr" type="string"/>
+    <aura:attribute name="EmpPsswrd" type="string"/>
+
+    <lightning:card iconName="utility:announcement" >
+    <lightning:input label="Enter Your Name" value="{!v.EmpName}"/>
+    <lightning:input label="Enter Your phone Number" type="text" value="{!v.EmpPhnNmbr}"/>
+    <lightning:input label="Enter Your Educational Qualification" type="text" value="{!v.EmpEducation}"/>
+    <lightning:input label="Enter Your City" type="text" value="{!v.EmpCity}"/>
+    <lightning:input label="Enter Your Email" type="email" value="{!v.EmpEmail}"/>
+     <lightning:input label="Enter Your DOB" type="DateTime" value="{!v.EmpDOB}"/>
+     <lightning:input label="Enter Your Joining Date" type="Date" value="{!v.EmpJoinDate}"/>
+     <lightning:input label="Enter Your Fav Color" type="color" value="{!v.EmpFavClr}"/>
+     <lightning:input label="Enter Your Password" type="Password" value="{!v.EmpPsswrd}"/>
+    
+    <aura:set attribute="title">
+    <b>SteepleChase DR</b>
+    </aura:set>
+    
+    <aura:set attribute="actions">
+        <lightning:buttonGroup>
+        <lightning:button label="Save" variant="success" iconName="utility:save" onclick="{!c.saveme}"/>
+        <lightning:button label="Clear" variant="destructive" iconName="utility:clear" onclick="{!c.clearme}"/>
+            </lightning:buttonGroup>
+    </aura:set>
+        </lightning:card>
+</aura:component>

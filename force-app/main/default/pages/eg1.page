@@ -1,0 +1,13 @@
+<apex:page showheader="false">
+<apex:form >
+    <apex:pageBlock title="calculator">
+        <apex:pageBlockSection title="Add" columns="1">
+            <apex:inputText label="Enter First Number"/>
+            <apex:inputText label="Enter Second Number"/>
+            <apex:commandButton value="Calculate"/>
+            <apex:outputText label="The result is"></apex:outputText>
+        </apex:pageBlockSection>
+    
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

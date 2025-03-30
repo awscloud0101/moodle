@@ -1,0 +1,36 @@
+<aura:component >
+	<lightning:card title="Account" iconName="standard:account">
+    <b>THIS IS THE CARD AND THIS TEXT IS THE BODY</b>
+    </lightning:card>
+    
+    <lightning:card iconName="action:edit_groups">
+    <aura:set attribute="title">
+        AgriControl_Vendor<br/>
+        <b>American Banking Corp.</b>
+    </aura:set>
+       
+    <aura:set attribute="actions">
+        <lightning:buttonIcon iconName="utility:hierarchy" alternativeText="dilip"/>
+        <lightning:button  label="Follow" iconName="utility:add"/>
+        <lightning:buttonGroup>
+        <lightning:button  label="New Contact"/>
+		<lightning:button  label="New Case"/>
+        <lightning:button  label="New Note"/>
+        
+        <lightning:buttonMenu>
+            <lightning:menuItem label="New Oppertunity"/>
+            <lightning:menuItem label="Change Owner"/>
+            <lightning:menuItem label="Submit for Approval"/>
+            <lightning:menuItem label="Edit"/>
+            </lightning:buttonMenu>    
+            </lightning:buttonGroup>
+		</aura:set> 
+        <aura:set attribute="footer">
+            <c:lgbuttton />
+        </aura:set>
+        <b>No activities to show.<br/>Get started by sending an email, scheduling a task, and more.</b><p></p>
+        
+    </lightning:card>
+    
+    <b>this is for below the card </b>
+</aura:component>

@@ -1,0 +1,39 @@
+<aura:component >
+	 <aura:attribute name="interest" type="Decimal"/>
+        <aura:attribute name="emi" type="Decimal"/>
+    
+    <div class="myimg">
+        <img src="{!$Resource.ICIC1}" width="600"/>
+            </div>
+    
+    <div class="mybx">
+        <lightning:card iconName="utility:budget_category_value" class="mycrd1">
+            <aura:set attribute="title">
+                <div class="myttl">
+                    <b>ICICI BANK EMI CALCULATOR</b><br/>
+                    PERSONAL LOAN by <b>DILEEP</b>
+                </div>
+            </aura:set>
+            <aura:set attribute="actions">
+                <lightning:buttonGroup>
+                    <lightning:button label="Lekka Entha" iconName = "utility:answer" onclick="{!c.calcme}" class="mybtn1"/>
+                    <lightning:button label="Kali Chey" iconName = "utility:announcement" onclick="{!c.clearme}" class="mybtn2"/>
+                </lightning:buttonGroup>
+            </aura:set>
+            
+            <b> <lightning:input label="Enter The Principal Amount"   aura:id="inp1"/> </b>
+            <lightning:input label="Enter The Time Period(in Years)"   aura:id="inp2"/>
+            <lightning:input label="Enter the Rate of Interest"   aura:id="inp3"/>
+            <lightning:input label="Do you Like Our Service" type="checkbox"/>
+            
+            <lightning:card iconName="utility:favorite_alt"/>
+            <div class="myttl">
+                <b>Total Interest Payable : </b> {!v.interest} <p></p>
+                <b> The Monthly EMI is : </b> {!v.emi}
+            </div>
+        </lightning:card>
+            </div>
+     <div class="myimg2">
+        <img src="{!$Resource.tq2}" />
+            </div>
+</aura:component>
