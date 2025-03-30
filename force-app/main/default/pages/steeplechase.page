@@ -1,0 +1,24 @@
+<apex:page standardController="steeplechase__c" showHeader="false" >
+    <apex:form >
+    <apex:pageBlock title="flat details">
+        
+        <apex:pageBlockSection title="Flot Inputs" columns="1">
+            <apex:inputText label="Enter Flot Number"/> 
+            <apex:commandButton value="Retrive"/>	
+            </apex:pageBlockSection>
+ 
+         <apex:pageBlockSection title="owner personal details" columns="3">
+             <apex:outputText value="{!steeplechase__c.flot_Owner__c}"/>
+            <apex:outputField value="{!steeplechase__c.rental_start_date__c}"/>
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection title="owner contact details" columns="2">
+            <apex:outputField value="{!steeplechase__c.flat_owner_Phone_Number__c}"/>
+            </apex:pageBlockSection>
+        
+        <apex:pageBlockSection title="flot payment details" columns="4">
+            <apex:outputField value="{!steeplechase__c.rent_amount__c}"/>
+            </apex:pageBlockSection>
+    </apex:pageBlock>
+        </apex:form>
+</apex:page>
