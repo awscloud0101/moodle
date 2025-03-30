@@ -3,51 +3,21 @@ name: Salesforce Deployment
 on:
   push:
     branches:
-      - dev
-      - qa
-      - main
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Install Salesforce CLI
-        run: |
-          npm install --global @salesforce/cli
-          echo "$(npm root --global)/bin" >> $GITHUB_PATH
-
-      - name: Verify Salesforce CLI Installation
-        run: sf --version
-
-      - name: Set Environment Variables
-        run: |
-          if [[ "${{ github.ref_name }}" == "dev" ]]; then
-            echo "SF_USERNAME=${{ secrets.DEV_USERNAME }}" >> $GITHUB_ENV
-            echo "SF_SERVERKEY=${{ secrets.DEV_SERVERKEY }}" >> $GITHUB_ENV
-            echo "SF_CLIENTID=${{ secrets.DEV_CLIENTID }}" >> $GITHUB_ENV
-            echo "SF_ALIAS=moodledev" >> $GITHUB_ENV
-          elif [[ "${{ github.ref_name }}" == "qa" ]]; then
-            echo "SF_USERNAME=${{ secrets.QA_USERNAME }}" >> $GITHUB_ENV
-            echo "SF_SERVERKEY=${{ secrets.QA_SERVERKEY }}" >> $GITHUB_ENV
-            echo "SF_CLIENTID=${{ secrets.QA_CLIENTID }}" >> $GITHUB_ENV
-            echo "SF_ALIAS=moodleQA" >> $GITHUB_ENV
-          elif [[ "${{ github.ref_name }}" == "main" ]]; then
-            echo "SF_USERNAME=${{ secrets.PROD_USERNAME }}" >> $GITHUB_ENV
-            echo "SF_SERVERKEY=${{ secrets.PROD_SERVERKEY }}" >> $GITHUB_ENV
-            echo "SF_CLIENTID=${{ secrets.PROD_CLIENTID }}" >> $GITHUB_ENV
-            echo "SF_ALIAS=moodleprod" >> $GITHUB_ENV
-          fi
-
-      - name: Authenticate with Salesforce Org
-        run: sf org login jwt --username $SF_USERNAME --jwt-key-file <(echo "$SF_SERVERKEY") --client-id $SF_CLIENTID --alias $SF_ALIAS
-
-      - name: Deploy to Salesforce
-        run: sf project deploy start --manifest manifest/package.xml --target-org $SF_ALIAS
+  dev:
+   step:
+    name: Dev Deployment
+    script:
+     - sf org login jwt --username $DEV_USERNAME --jwt-key-file $DEV_SERVERKEY --client-id $DEV-CLIENTID --alias moodledev
+     - sf project deploy start --manifest manifest/package.xml --target-org moodledev
+  qa:
+   step:
+    name: qa Deployment
+    script:
+     - sf org login jwt --username $QA_USERNAME --jwt-key-file $QA_SERVERKEY --client-id $QA-CLIENTID --alias moodleQA
+     - sf project deploy start --manifest manifest/package.xml --target-org moodleQA
+  main:
+   step:
+    name: Production Deployment
+    script:
+     - sf org login jwt --username $PROD_USERNAME --jwt-key-file $PROD_SERVERKEY --client-id $PROD-CLIENTID --alias moodleprod
+     - sf project deploy start --manifest manifest/package.xml --target-org moodleprod
