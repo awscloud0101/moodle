@@ -14,10 +14,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set Up Salesforce CLI
-        uses: salesforcecli/github-action@v2
-        with:
-          version: latest
+      - name: Install Salesforce CLI
+        run: npm install --global sfdx-cli
+
+      - name: Verify Salesforce CLI Installation
+        run: sf --version
 
       - name: Set Environment Variables
         run: |
