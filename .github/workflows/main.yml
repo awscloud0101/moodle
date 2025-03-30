@@ -1,21 +1,24 @@
 images: salesforce/cli:latest-full
+
 pipelines:
-   branches:
+  branches:
     dev:
-     step:
-      name: Dev Deployment
-      script:
-       - sf org login jwt --username $DEV_USERNAME --jwt-key-file $DEV_SERVERKEY --client-id $DEV-CLIENTID --alias moodledev
-       - sf project deploy start --manifest manifest/package.xml --target-org moodledev
+      - step:
+          name: Dev Deployment
+          script:
+            - sf org login jwt --username $DEV_USERNAME --jwt-key-file $DEV_SERVERKEY --client-id $DEV_CLIENTID --alias moodledev
+            - sf project deploy start --manifest manifest/package.xml --target-org moodledev
+
     qa:
-     step:
-      name: qa Deployment
-      script:
-     - sf org login jwt --username $QA_USERNAME --jwt-key-file $QA_SERVERKEY --client-id $QA-CLIENTID --alias moodleQA
-     - sf project deploy start --manifest manifest/package.xml --target-org moodleQA
+      - step:
+          name: QA Deployment
+          script:
+            - sf org login jwt --username $QA_USERNAME --jwt-key-file $QA_SERVERKEY --client-id $QA_CLIENTID --alias moodleQA
+            - sf project deploy start --manifest manifest/package.xml --target-org moodleQA
+
     main:
-     step:
-      name: Production Deployment
-      script:
-       - sf org login jwt --username $PROD_USERNAME --jwt-key-file $PROD_SERVERKEY --client-id $PROD-CLIENTID --alias moodleprod
-       - sf project deploy start --manifest manifest/package.xml --target-org moodleprod
+      - step:
+          name: Production Deployment
+          script:
+            - sf org login jwt --username $PROD_USERNAME --jwt-key-file $PROD_SERVERKEY --client-id $PROD_CLIENTID --alias moodleprod
+            - sf project deploy start --manifest manifest/package.xml --target-org moodleprod
