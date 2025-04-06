@@ -30,6 +30,6 @@ jobs:
 
    - name: Deploy to Production Org
   run: |
-    sfdx project deploy start \
+    sf project deploy start \
       --target-org moodleprod \
       --wait 10
