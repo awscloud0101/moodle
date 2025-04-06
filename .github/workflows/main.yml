@@ -1,4 +1,4 @@
-name: Deploy to Production
+name: Deploy to Development
 
 on:
   push:
@@ -17,17 +17,17 @@ jobs:
       uses: sfdx-actions/setup-sfdx@v1
 
     - name: Write private key to file
-      run: echo "${{ secrets.PROD_SERVERKEY }}" > server.key
+      run: echo "${{ secrets.DEV_SERVERKEY }}" > server.key
 
     - name: Authenticate to Production Org using JWT
       run: |
         sfdx auth:jwt:grant \
-          --client-id ${{ secrets.PROD_CLIENTID }} \
+          --client-id ${{ secrets.DEV_CLIENTID }} \
           --jwt-key-file server.key \
-          --username ${{ secrets.PROD_USERNAME }} \
+          --username ${{ secrets.DEV_USERNAME }} \
           --instance-url https://login.salesforce.com \
-          --alias prod
+          --alias moodledev
 
-    - name: Deploy to Production Org
+    - name: Deploy to Devlopment Org
       run: |
-        sf project deploy start --manifest manifest/package.xml --target-org prod --wait 10
+        sf project deploy start --manifest manifest/package.xml --target-org moodledev --wait 10
