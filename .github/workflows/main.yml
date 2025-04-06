@@ -16,6 +16,9 @@ jobs:
     - name: Install Salesforce CLI
       uses: sfdx-actions/setup-sfdx@v1
 
+    - name: Check Salesforce CLI Version
+      run: sfdx --version
+
     - name: Write private key to file
       run: echo "${{ secrets.PROD_SERVERKEY }}" > server.key
 
@@ -26,10 +29,11 @@ jobs:
           --jwt-key-file server.key \
           --username ${{ secrets.PROD_USERNAME }} \
           --instance-url https://login.salesforce.com \
-          --alias prod
+          --alias moodleprod
 
     - name: Deploy to Production Org
       run: |
         sfdx project deploy start \
-          --target-org prod \
-          --wait 10
+          --target-org moodleprod \
+          --wait 10 \
+          --verbose
