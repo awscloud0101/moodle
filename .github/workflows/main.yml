@@ -32,12 +32,11 @@ jobs:
           --jwt-key-file server.key \
           --username ${{ secrets.PROD_USERNAME }} \
           --instance-url https://login.salesforce.com \
-          --alias prod
+          --alias moodleprod
 
     - name: Deploy to Production Org (Using Metadata API Deploy)
       run: |
-        sfdx force:mdapi:deploy \
-          --deploydir ./force-app \
-          --targetusername prod \
+       sf project deploy start --manifest manifest/package.xml \
+          --targetusername moodleprod \
           --wait 10 \
           --verbose
