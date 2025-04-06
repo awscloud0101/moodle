@@ -19,6 +19,9 @@ jobs:
     - name: Check Salesforce CLI Version
       run: sfdx --version
 
+    - name: List Files in force-app
+      run: ls -R force-app
+
     - name: Write private key to file
       run: echo "${{ secrets.PROD_SERVERKEY }}" > server.key
 
@@ -29,11 +32,12 @@ jobs:
           --jwt-key-file server.key \
           --username ${{ secrets.PROD_USERNAME }} \
           --instance-url https://login.salesforce.com \
-          --alias moodleprod
+          --alias prod
 
-    - name: Deploy to Production Org
+    - name: Deploy to Production Org (Using Metadata API Deploy)
       run: |
-        sfdx project deploy start \
-          --target-org moodleprod \
+        sfdx force:mdapi:deploy \
+          --deploydir ./force-app \
+          --targetusername prod \
           --wait 10 \
           --verbose
