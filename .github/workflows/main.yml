@@ -28,11 +28,8 @@ jobs:
           --instance-url https://login.salesforce.com \
           --alias prod
 
-    - name: Deploy to Production Org
-      run: |
-        sfdx force:source:deploy \
-          --targetusername prod \
-          --sourcepath force-app \
-          --checkonly false \
-          --testlevel RunLocalTests \
-          --wait 10
+   - name: Deploy to Production Org
+  run: |
+    sfdx project deploy start \
+      --target-org moodleprod \
+      --wait 10
