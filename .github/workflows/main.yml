@@ -1,33 +1,87 @@
-name: Deploy to Development
+name: Salesforce Deployment Pipeline
 
 on:
   push:
     branches:
-      - main  # Trigger only when main is pushed
+      - dev
+      - qa
+      - main
 
 jobs:
-  deploy-to-prod:
+  deploy-to-dev:
+    if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout the repo
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Install Salesforce CLI
-      uses: sfdx-actions/setup-sfdx@v1
+      - name: Install Salesforce CLI
+        uses: sfdx-actions/setup-sfdx@v1
 
-    - name: Write private key to file
-      run: echo "${{ secrets.DEV_SERVERKEY }}" > server.key
+      - name: Write Dev private key
+        run: echo "${{ secrets.DEV_SERVERKEY }}" > server.key
 
-    - name: Authenticate to Production Org using JWT
-      run: |
-        sfdx auth:jwt:grant \
-          --client-id ${{ secrets.DEV_CLIENTID }} \
-          --jwt-key-file server.key \
-          --username ${{ secrets.DEV_USERNAME }} \
-          --instance-url https://login.salesforce.com \
-          --alias moodledev
+      - name: Authenticate to Dev Org
+        run: |
+          sfdx auth:jwt:grant \
+            --client-id ${{ secrets.DEV_CLIENTID }} \
+            --jwt-key-file server.key \
+            --username ${{ secrets.DEV_USERNAME }} \
+            --instance-url https://login.salesforce.com \
+            --alias dev
 
-    - name: Deploy to Devlopment Org
-      run: |
-        sf project deploy start --manifest manifest/package.xml --target-org moodledev --wait 10
+      - name: Deploy to Dev Org
+        run: |
+          sf project deploy start -p force-app -u dev --wait 10
+
+  deploy-to-qa:
+    if: github.ref == 'refs/heads/qa'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Salesforce CLI
+        uses: sfdx-actions/setup-sfdx@v1
+
+      - name: Write QA private key
+        run: echo "${{ secrets.QA_SERVERKEY }}" > server.key
+
+      - name: Authenticate to QA Org
+        run: |
+          sfdx auth:jwt:grant \
+            --client-id ${{ secrets.QA_CLIENTID }} \
+            --jwt-key-file server.key \
+            --username ${{ secrets.QA_USERNAME }} \
+            --instance-url https://login.salesforce.com \
+            --alias qa
+
+      - name: Deploy to QA Org
+        run: |
+          sf project deploy start -p force-app -u qa --wait 10
+
+  deploy-to-prod:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Salesforce CLI
+        uses: sfdx-actions/setup-sfdx@v1
+
+      - name: Write Prod private key
+        run: echo "${{ secrets.PROD_SERVERKEY }}" > server.key
+
+      - name: Authenticate to Prod Org
+        run: |
+          sfdx auth:jwt:grant \
+            --client-id ${{ secrets.PROD_CLIENTID }} \
+            --jwt-key-file server.key \
+            --username ${{ secrets.PROD_USERNAME }} \
+            --instance-url https://login.salesforce.com \
+            --alias prod
+
+      - name: Deploy to Production Org
+        run: |
+          sf project deploy start -p force-app -u prod --wait 10
