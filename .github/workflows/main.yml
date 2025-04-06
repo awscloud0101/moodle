@@ -29,6 +29,5 @@ jobs:
           --alias prod
 
     - name: Deploy to Production Org
-  run: |
-    sf project deploy start -p force-app -u prod
-
+      run: |
+        sf project deploy start --manifest manifest/package.xml --target-org prod --wait 10
