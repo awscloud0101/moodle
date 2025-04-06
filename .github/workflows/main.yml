@@ -26,8 +26,8 @@ jobs:
           --jwt-key-file server.key \
           --username ${{ secrets.PROD_USERNAME }} \
           --instance-url https://login.salesforce.com \
-          --alias moodleprod
+          --alias prod
 
     - name: Deploy to Production Org
   run: |
-    sf project deploy start --manifest ./manifest/package.xml --target-org moodleprod --wait 10 --verbose
+    sf project deploy start --manifest ./manifest/package.xml --target-org prod --wait 10 --verbose
