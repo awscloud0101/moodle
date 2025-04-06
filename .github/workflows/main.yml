@@ -1,23 +1,38 @@
-name: Salesforce Deployment
+name: Deploy to Production
 
 on:
   push:
     branches:
-  dev:
-   step:
-    name: Dev Deployment
-    script:
-     - sf org login jwt --username $DEV_USERNAME --jwt-key-file $DEV_SERVERKEY --client-id $DEV-CLIENTID --alias moodledev
-     - sf project deploy start --manifest manifest/package.xml --target-org moodledev
-  qa:
-   step:
-    name: qa Deployment
-    script:
-     - sf org login jwt --username $QA_USERNAME --jwt-key-file $QA_SERVERKEY --client-id $QA-CLIENTID --alias moodleQA
-     - sf project deploy start --manifest manifest/package.xml --target-org moodleQA
-  main:
-   step:
-    name: Production Deployment
-    script:
-     - sf org login jwt --username $PROD_USERNAME --jwt-key-file $PROD_SERVERKEY --client-id $PROD-CLIENTID --alias moodleprod
-     - sf project deploy start --manifest manifest/package.xml --target-org moodleprod
+      - main  # Trigger only when main is pushed
+
+jobs:
+  deploy-to-prod:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the repo
+      uses: actions/checkout@v3
+
+    - name: Install Salesforce CLI
+      uses: sfdx-actions/setup-sfdx@v1
+
+    - name: Write private key to file
+      run: echo "${{ secrets.PROD_SERVERKEY }}" > server.key
+
+    - name: Authenticate to Production Org using JWT
+      run: |
+        sfdx auth:jwt:grant \
+          --clientid ${{ secrets.PROD_CLIENTID }} \
+          --jwtkeyfile server.key \
+          --username ${{ secrets.PROD_USERNAME }} \
+          --instanceurl https://login.salesforce.com \
+          --setalias moodleprod
+
+    - name: Deploy to Production Org
+      run: |
+        sfdx force:source:deploy \
+          --targetusername prod \
+          --sourcepath force-app \
+          --checkonly false \
+          --testlevel RunLocalTests \
+          --wait 10
