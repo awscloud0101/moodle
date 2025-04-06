@@ -22,11 +22,11 @@ jobs:
     - name: Authenticate to Production Org using JWT
       run: |
         sfdx auth:jwt:grant \
-          --clientid ${{ secrets.PROD_CLIENTID }} \
-          --jwtkeyfile server.key \
+          --client-id ${{ secrets.PROD_CLIENTID }} \
+          --jwt-key-file server.key \
           --username ${{ secrets.PROD_USERNAME }} \
-          --instanceurl https://login.salesforce.com \
-          --setalias moodleprod
+          --instance-url https://login.salesforce.com \
+          --alias prod
 
     - name: Deploy to Production Org
       run: |
