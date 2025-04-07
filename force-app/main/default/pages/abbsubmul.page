@@ -1,0 +1,21 @@
+<apex:page showHeader="false" >
+    <apex:form >
+    
+    <apex:pageBlock title="Calculator">
+        <apex:pageBlockSection title="Basic Match Calc" columns="1">
+            <apex:inputText label="Enter First Number"/>
+    <apex:inputText label="Enter Second Number"/>
+            <apex:selectRadio label="Select your Choice">
+                <apex:selectOption itemLabel="add" itemValue="1"/>
+                <apex:selectOption itemLabel="sub" itemValue="4"/>
+                <apex:selectOption itemLabel="mul" itemValue="3"/>
+                <apex:selectOption itemLabel="div" itemValue="2"/>
+            </apex:selectRadio>
+            
+            <apex:commandButton value="Calculate"/>
+            <apex:outputText label="The Result is:"/>
+            
+        </apex:pageBlockSection>
+        </apex:pageBlock>    
+    </apex:form>
+</apex:page>
