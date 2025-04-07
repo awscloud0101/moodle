@@ -1,18 +1,19 @@
-name: Salesforce CI/CD Pipeline
+name: Manual Deploy
 
 on:
-  push:
-    branches:
-      - dev
-      - qa
-      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: Select environment to deploy
+        options:
+          - dev
+          - qa
+          - prod
 
 jobs:
-  deploy-dev:
-    if: github.ref == 'refs/heads/dev'
+  deploy:
     runs-on: ubuntu-latest
-    name: Deploy to Dev Org
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -20,97 +21,39 @@ jobs:
       - name: Install Salesforce CLI
         uses: sfdx-actions/setup-sfdx@v1
 
-      - name: Write Dev Server Key
-        run: echo "${{ secrets.DEV_SERVERKEY }}" > server.key
+      - name: Set deployment environment
+        id: set-env
+        run: |
+          if [[ "${{ github.event.inputs.environment }}" == "dev" ]]; then
+            echo "CLIENT_ID=${{ secrets.DEV_CLIENTID }}" >> $GITHUB_ENV
+            echo "SERVER_KEY=${{ secrets.DEV_SERVERKEY }}" >> $GITHUB_ENV
+            echo "USERNAME=${{ secrets.DEV_USERNAME }}" >> $GITHUB_ENV
+            echo "ALIAS=moodledev" >> $GITHUB_ENV
+          elif [[ "${{ github.event.inputs.environment }}" == "qa" ]]; then
+            echo "CLIENT_ID=${{ secrets.QA_CLIENTID }}" >> $GITHUB_ENV
+            echo "SERVER_KEY=${{ secrets.QA_SERVERKEY }}" >> $GITHUB_ENV
+            echo "USERNAME=${{ secrets.QA_USERNAME }}" >> $GITHUB_ENV
+            echo "ALIAS=moodleqa" >> $GITHUB_ENV
+          else
+            echo "CLIENT_ID=${{ secrets.PROD_CLIENTID }}" >> $GITHUB_ENV
+            echo "SERVER_KEY=${{ secrets.PROD_SERVERKEY }}" >> $GITHUB_ENV
+            echo "USERNAME=${{ secrets.PROD_USERNAME }}" >> $GITHUB_ENV
+            echo "ALIAS=moodleprod" >> $GITHUB_ENV
+          fi
 
-      - name: Authenticate to Dev Org
+      - name: Write server key
+        run: echo "${SERVER_KEY}" > server.key
+
+      - name: Authenticate to selected org
         run: |
           sfdx auth:jwt:grant \
-            --client-id ${{ secrets.DEV_CLIENTID }} \
+            --client-id $CLIENT_ID \
             --jwt-key-file server.key \
-            --username ${{ secrets.DEV_USERNAME }} \
-            --instance-url https://test.salesforce.com \
-            --alias moodledev
-
-      - name: Deploy to Dev Org
-        run: sf project deploy start -p force-app -o moodledev --wait 10
-
-      - name: Upload Deployment Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: dev-artifact
-          path: force-app
-
-  deploy-qa:
-    if: github.ref == 'refs/heads/qa'
-    runs-on: ubuntu-latest
-    name: Deploy to QA Org
-    needs: deploy-dev
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Download Dev Artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: dev-artifact
-          path: force-app
-
-      - name: Install Salesforce CLI
-        uses: sfdx-actions/setup-sfdx@v1
-
-      - name: Write QA Server Key
-        run: echo "${{ secrets.QA_SERVERKEY }}" > server.key
-
-      - name: Authenticate to QA Org
-        run: |
-          sfdx auth:jwt:grant \
-            --client-id ${{ secrets.QA_CLIENTID }} \
-            --jwt-key-file server.key \
-            --username ${{ secrets.QA_USERNAME }} \
-            --instance-url https://test.salesforce.com \
-            --alias moodleqa
-
-      - name: Deploy to QA Org
-        run: sf project deploy start -p force-app -o moodleqa --wait 10
-
-      - name: Upload QA Deployment Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: qa-artifact
-          path: force-app
-
-  deploy-prod:
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    name: Deploy to Production Org
-    needs: deploy-qa
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Download QA Artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: qa-artifact
-          path: force-app
-
-      - name: Install Salesforce CLI
-        uses: sfdx-actions/setup-sfdx@v1
-
-      - name: Write Prod Server Key
-        run: echo "${{ secrets.PROD_SERVERKEY }}" > server.key
-
-      - name: Authenticate to Production Org
-        run: |
-          sfdx auth:jwt:grant \
-            --client-id ${{ secrets.PROD_CLIENTID }} \
-            --jwt-key-file server.key \
-            --username ${{ secrets.PROD_USERNAME }} \
+            --username $USERNAME \
             --instance-url https://login.salesforce.com \
-            --alias moodleprod
+            --alias $ALIAS
 
-      - name: Deploy to Production Org
-        run: sf project deploy start -p force-app -o moodleprod --wait 10
+      - name: Deploy to selected org
+        run: |
+          sf project deploy start -p force-app -u $ALIAS --wait 10
+
